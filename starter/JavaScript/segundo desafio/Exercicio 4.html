@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let form = document.createElement('form');
+    let input = document.createElement('input');
+    let button = document.createElement('button');
+    let ul = document.createElement('ul');
+    let div = document.createElement('div');
+
+    let body = document.querySelector('body');
+
+    body.appendChild(form);
+
+    form.appendChild(input);
+    form.appendChild(button);
+
+    body.appendChild(div);
+    div.appendChild(ul);
+
+    input.setAttribute('type', 'text');
+    input.setAttribute('name', 'nome');
+    input.setAttribute('value', '');
+
+    var nomes = ['Diego', 'Gabriel', 'Lucas'];
+    console.log(nomes);
+
+    button.style.width = '100px';
+    button.style.height = '20px';
+    button.style.padding = '1px';
+
+    button.textContent = 'Inserir nome';
+
+    function preventFormDefault(event) {
+      function handleSubmit(event) {
+        event.preventDefault();
+      }
+
+      form.addEventListener('submit', handleSubmit)
+    }
+
+    function inputValue(event) {
+      if (event.key === 'Enter') {
+        ul.innerHTML = '';
+        nomes.push(event.target.value);
+        console.log(nomes)
+        render();
+
+        event.target.value = '';
+      }
+    }
+
+    function render() {
+      for (let i = 0; i < nomes.length; i++) {
+        const li = document.createElement('li');
+        li.textContent = nomes[i];
+        ul.appendChild(li);
+      }
+    }
+
+    window.addEventListener('load', render);
+
+    input.addEventListener('keyup', preventFormDefault);
+    input.addEventListener('keyup', inputValue);
+
+  </script>
+</body>
+
+</html>
